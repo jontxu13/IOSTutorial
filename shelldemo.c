@@ -66,10 +66,19 @@ int execute(int argc, char *argv[])
 {
     char currentDir[200];
 
-    if(strcmp(argv[0], "cd")==0){
-        chdir(argv[1]);
+    if(strcmp(argv[0], "exit")==0){
+       exit(0);
+    }else if(strcmp(argv[0], "cd")==0) {
+        if(argc<2){
+            printf("Need more parameter, Ex: 'cd root'\n");
+        }else{
+            if (chdir(argv[1])==-1){
+                return -1;
+            }else{
+                chdir(argv[1]);
+            }
+        }
     }else{
-
         getcwd(currentDir, sizeof(currentDir));
         sprintf(currentDir, "%s%s", programPath,argv[0]);
 
